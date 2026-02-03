@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../css/bootstrap.min.css">
+    <link rel="stylesheet" href="../css/style.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
+    <title>Propiedades computadas</title>
+</head>
+
+<body>
+    <section id="componente" class="container mt-4">
+        <header>
+            <h1>Agenda Telefonica</h1>
+        </header>
+        <hr>
+
+        <div class="parrafo">
+            <h3>Nuevo Contacto</h3>
+
+            <label>Nombre:</label>
+            <input type="text" v-model="nombre">
+            <br><br>
+            <label>Telefono:</label>
+            <input type="number" v-model="telefono">
+            <br><br>
+            <label>Categoría:</label>
+            <select v-model="categoria">
+                <option>Familiar</option>
+                <option>Amistad</option>
+                <option>Trabajo</option>
+            </select>
+            <br><br>
+
+            <button @click="agregarContacto">Agregar Contacto</button>
+            <br>
+
+            <div v-if="error" class="mensaje error">
+                <p>{{error}}</p>
+                <img src="../img/error.jpg">
+            </div>
+
+            <div v-else-if="mensaje" class="mensaje correcto">
+                <p>Contacto agregado correctamente</p>
+                <img src="../img/bien.jpg">
+            </div>
+        </div>
+
+        <br>
+        <table border="1" align="center">
+            <tr>
+                <th></th>
+                <th>Nombre</th>
+                <th>Telefono</th>
+                <th>Categoria</th>
+                <th>Mensajes</th>
+                <th>Llamadas</th>
+            </tr>
+
+            <tr v-for="(c, index) in contactos" :key="index">
+                <td>
+                    <button @click="eliminarContacto(index)"><i class="bi bi-trash3-fill"
+                            style="color: rgb(227, 147, 147);"></i></button>
+                </td>
+                <td>{{c.nombre}}</td>
+                <td>{{c.telefono}}</td>
+                <td>{{c.categoria}}</td>
+
+                <td>
+                    <button @click="c.mensajes++">+</button>
+                    {{c.mensajes}}
+                    <button @click="c.mensajes--" v-show="c.mensajes > 0">-</button>
+                </td>
+
+                <td>
+                    <button @click="c.llamadas++">+</button>
+                    {{c.llamadas}}
+                    <button @click="c.llamadas--" v-show="c.llamadas > 0">-</button>
+                </td>
+            </tr>
+        </table>
+
+        <p><strong>Contactos:</strong> {{totalContactos}}</p>
+        <p><strong>Total de mensajes:</strong> {{totalMensajes}} </p>
+        <p><strong>Total de llamadas:</strong> {{totalLlamadas}} </p>
+
+
+    </section>
+
+    <script src="../js/vue3.js"></script>
+    <script src="../js/script.js"></script>
+
+</body>
+
+</html>
