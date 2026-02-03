@@ -22,8 +22,8 @@ const app = {
                 nombre: this.nombre,
                 telefono: this.telefono,
                 categoria: this.categoria,
-                mensajes: 1,
-                llamadas: 1,
+                mensajes: 0,
+                llamadas: 0,
             });
 
             this.nombre = '';
@@ -50,4 +50,5 @@ const app = {
         }
     }
 };
+
 const app1 = Vue.createApp(app).mount('#componente');
